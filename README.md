@@ -18,7 +18,11 @@ led.blink(50);
 
 ### blink(freq)
 
-Make in blink in a certain milliseconds frequency.
+Make it blink in a certain milliseconds frequency.
+
+### pulse(on_freq, off_freq)
+
+Make it go on and off with different frequencies.
 
 ### on()
 

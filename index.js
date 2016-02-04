@@ -34,7 +34,7 @@ blink.prototype.off = function(fn){
 	return self;
 };
 
-blink.prototype.pulse = function(freq){
+blink.prototype.blink = function(freq){
 	var self = this;
 	if (!freq || typeof freq !== "number") freq = 100;
 	else if (freq < 50) freq = 50;
@@ -43,6 +43,23 @@ blink.prototype.pulse = function(freq){
 		self.timer = setInterval(function(){
 			self.pin.write(++state%2);
 		},freq);
+	});
+	return self;
+};
+
+blink.prototype.pulse = function(onfreq, offfreq){
+	var self = this;
+	if (!onfreq || typeof onfreq !== "number") onfreq = 100;
+	if (!offfreq || typeof offreq !== "number") offfreq = onfreq;
+	if (onfreq < 50) onfreq = 50;
+	if (offfreq < 50) offfreq = 50;
+	self.stop(function(){
+		self.timer = setInterval(function(){
+			self.pin.write(1);
+			setTimeout(function(){
+				self.pin.write(0);
+			},offreq)
+		},onfreq+offreq);
 	});
 	return self;
 };
