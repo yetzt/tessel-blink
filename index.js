@@ -47,19 +47,23 @@ blink.prototype.blink = function(freq){
 	return self;
 };
 
-blink.prototype.pulse = function(onfreq, offfreq){
+blink.prototype.pulse = function(freq_low, freq_high){
 	var self = this;
-	if (!onfreq || typeof onfreq !== "number") onfreq = 100;
-	if (!offfreq || typeof offreq !== "number") offfreq = onfreq;
-	if (onfreq < 50) onfreq = 50;
-	if (offfreq < 50) offfreq = 50;
+	if (!freq_high || typeof freq_high !== "number") freq_high = 100;
+	if (!freq_low || typeof freq_low !== "number") freq_low = freq_high;
+	if (freq_high < 50) freq_high = 50;
+	if (freq_low < 50) freq_low = 50;
 	self.stop(function(){
+		self.pin.write(1);
+		setTimeout(function(){
+			self.pin.write(0);
+		},freq_low)
 		self.timer = setInterval(function(){
 			self.pin.write(1);
 			setTimeout(function(){
 				self.pin.write(0);
-			},offreq)
-		},onfreq+offreq);
+			},freq_low)
+		},freq_high+freq_low);
 	});
 	return self;
 };
