@@ -1,0 +1,8 @@
+{
+  "name": "tessel-blink",
+  "version": "0.0.1",
+  "description": "make leds on gpio pins blink",
+  "main": "index.js",
+  "author": "Sebastian Vollnhals <sv@dsst.io> (https://dsst.io/)",
+  "license": "Unlicense"
+}
